@@ -36,6 +36,7 @@ void print_list(node *p)
   return;
 }
 
+/* squares all the numbers and adds them together */
 int sum_squares(node *p)
 {
   if (p == NULL)
@@ -45,6 +46,7 @@ int sum_squares(node *p)
   return square(p->value) + sum_squares(p->next);
 }
 
+/* uses a given function on all elements and makes a copy of the linked list */
 node *map(node *p, int (*f)(int))
 {
   if (p == NULL)
