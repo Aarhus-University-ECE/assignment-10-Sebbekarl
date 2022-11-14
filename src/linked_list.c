@@ -3,14 +3,14 @@
  * Linked list
  */
 
-#include <stdio.h>		/* printf */
-#include <stdlib.h>		/* malloc, free */
-#include <assert.h>		/* assert */
+#include <stdio.h>  /* printf */
+#include <stdlib.h> /* malloc, free */
+#include <assert.h> /* assert */
 
 /* functions to create lists */
-node *make_node (int v, node * q)
+node *make_node(int v, node *q)
 {
-  node *p = malloc (sizeof (node));
+  node *p = malloc(sizeof(node));
   p->value = v;
 
   if (q == &SENTINEL_node)
@@ -21,40 +21,40 @@ node *make_node (int v, node * q)
 }
 
 /* free all nodes in the list p */
-void free_list (node * p)
+void free_list(node *p)
 {
-  node *q = p;
-  while (q != &SENTINEL_node)
-    {
-      node *t = q->next;
-      free (q);
-      q = t;
-    }
+  p->next = NULL;
 }
-
 
 /* print list to console */
-void print_list (node * p)
+void print_list(node *p)
 {
-    // Add your code for exercise 1
-    // There is NO testcode for this
+  printf("%d, ", p->value);
+  if (p->next == NULL)
+    return;
+  print_list(p->next);
+  return;
 }
 
-int sum_squares (node * p)
+int sum_squares(node *p)
 {
-    // Add your code for excercise 2
-    // You can find the tests in tests.cpp
-    return -1;
+  if (p == NULL)
+    return 0;
+  if (p->next == NULL)
+    return square(p->value);
+  return square(p->value) + sum_squares(p->next);
 }
 
-node *map (node * p, int (*f) (int))
+node *map(node *p, int (*f)(int))
 {
-    // Add your code for excercise 3
+  if (p == NULL)
     return NULL;
+  if (p->next == NULL)
+    return make_node(f(p->value), NULL);
+  return make_node(f(p->value), map(p->next, f));
 }
 
-
-int square (int x)
+int square(int x)
 {
   return x * x;
 }
